@@ -7,7 +7,7 @@ const messageSchema = new Schema(
         require: true
 
     },
-    body: {
+    description: {
         type: String,
         required: true,
         maxlength: 500
