@@ -32,7 +32,7 @@ const userSchema = new Schema(
     ref: 'Trip'
   }],
 
-  message: [{
+  review: [{
     type: Schema.Types.ObjectId,
     ref: 'Message'
   }],

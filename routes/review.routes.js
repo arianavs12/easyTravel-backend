@@ -1,11 +1,12 @@
 const router = require("express").Router()
-const Message = require("../models/Message.model")
+const Review = require("../models/Review.model")
 const User = require("../models/User.model")
 
 //const mongoose = require("mongoose")
 
-router.get('/allMessages',(req,res)=>{
-    Message.find()
+//CRUD
+router.get('/allreviews',(req,res)=>{
+    Review.find()
     .then(allMessages=>{
         res.json(allMessages)
     })
@@ -14,15 +15,15 @@ router.get('/allMessages',(req,res)=>{
 
 router.get("/details/:id", (req, res) => {
     const { id } = req.params
-    Message.findById(id)
+    Review.findById(id)
         .then(details => {
             res.json(details)
         })
         .catch(console.log)
 })
 
-router.post('/create', (req, res) => {
-    Message.create(req.body)
+router.post('/createreview', (req, res) => {
+    Review.create(req.body)
         .then(newMessage => {
             const { _id } = newMessage
             User.findByIdAndUpdate(req.body.userId, {
@@ -38,7 +39,7 @@ router.post('/create', (req, res) => {
 
 router.put("/edit/:id", (req, res) => {
     const { id } = req.params
-    Message.findByIdAndUpdate(id, req.body, { new: true })
+    Review.findByIdAndUpdate(id, req.body, { new: true })
         .then(updatedMessage => {
             res.json(updatedMessage)
         })
@@ -47,7 +48,7 @@ router.put("/edit/:id", (req, res) => {
 
 router.delete("/delete/:id", (req, res) => {
     const { id } = req.params
-    Message.findByIdAndRemove(id)
+    Review.findByIdAndRemove(id)
         .then(eliminado => {
             User.findByIdAndUpdate(req.body.userId, { $pull: { message : id } }, { new: true })
                 .then(updatedUser => {

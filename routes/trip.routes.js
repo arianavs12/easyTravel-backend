@@ -4,6 +4,8 @@ const User = require("../models/User.model")
 
 //const mongoose = require("mongoose")
 
+//CRUD
+
 router.get('/alltrips',(req,res)=>{
     Trip.find()
     .then(allTrips=>{
