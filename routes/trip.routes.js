@@ -1,24 +1,60 @@
 const router = require("express").Router()
-const Viaje = require("../models/Trip.model")
+const Trip = require("../models/Trip.model")
+const User = require("../models/User.model")
 
 //const mongoose = require("mongoose")
 
-router.get('/viajes',(req,res)=>{
-    Viaje.find()
-    .then(alltrips=>{
-        console.log(alltrips)
-        res.json(alltrips)
+router.get('/alltrips',(req,res)=>{
+    Trip.find()
+    .then(allTrips=>{
+        res.json(allTrips)
     })
     .catch((err) => console.log(err))
 })
 
-router.post('/viajes', (req, res) => {
-    Viaje.create(req.body)
-        .then(newTrip => {
-            res.status(201).json(newTrip)
+router.get("/details/:id", (req, res) => {
+    const { id } = req.params
+    Trip.findById(id)
+        .then(details => {
+            res.json(details)
         })
-        .catch((err) => console.log(err))
+        .catch(console.log)
 })
 
+router.post('/create', (req, res) => {
+    Trip.create(req.body)
+        .then(newTrip => {
+            const { _id } = newTrip
+            User.findByIdAndUpdate(req.body.userId, {
+                $push: { trip: _id }
+            }, { new: true })
+            .then(updatedUser => {
+                console.log(updatedUser)
+                res.json(updatedUser)
+            })
+    })
+    .catch(console.log)
+})
+
+router.put("/edit/:id", (req, res) => {
+    const { id } = req.params
+    Trip.findByIdAndUpdate(id, req.body, { new: true })
+        .then(updatedTrip => {
+            res.json(updatedTrip)
+        })
+        .catch(console.log)
+})
+
+router.delete("/delete/:id", (req, res) => {
+    const { id } = req.params
+    Trip.findByIdAndRemove(id)
+        .then(eliminado => {
+            User.findByIdAndUpdate(req.body.userId, { $pull: { message : id } }, { new: true })
+                .then(updatedUser => {
+                    res.json(updatedUser)
+                }).catch(console.log)
+        })
+        .catch(console.log)
+})
 
 module.exports = router

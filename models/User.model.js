@@ -4,7 +4,7 @@ const { Schema, model } = require("mongoose");
 const userSchema = new Schema(
   {
     username:{
-      type: String,
+      type:String,
       required: true
     },
     name: {
@@ -32,9 +32,9 @@ const userSchema = new Schema(
     ref: 'Trip'
   }],
 
-  package: [{
+  message: [{
     type: Schema.Types.ObjectId,
-    ref: 'Package'
+    ref: 'Message'
   }],
 },
   {

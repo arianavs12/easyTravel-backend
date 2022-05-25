@@ -17,10 +17,6 @@ const messageSchema = new Schema(
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    package: {
-        type: Schema.Types.ObjectId,
-        ref: 'Package'
-    }
 },
 {
     timestamps: true
