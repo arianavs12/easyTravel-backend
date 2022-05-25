@@ -77,6 +77,12 @@ router.post("/signup", isLoggedOut, (req, res) => {
       .genSalt(saltRounds)
       .then((salt) => bcrypt.hash(password, salt))
       .then((hashedPassword) => {
+        console.log({
+          username,
+          password: hashedPassword,
+          name,
+          email
+        })
         // Create a user and save it in the database
         return User.create({
           username,
@@ -126,7 +132,10 @@ router.post("/login", isLoggedOut, (req, res, next) => {
   }
 
   // Search the database for a user with the username submitted in the form
-  User.findOne({ username })
+  User
+  .findOne({ username })
+  .populate('trip')
+  .populate('review')
     .then((user) => {
       // If the user isn't found, send the message that user provided wrong credentials
       if (!user) {

@@ -7,8 +7,8 @@ const User = require("../models/User.model")
 //CRUD
 router.get('/allreviews',(req,res)=>{
     Review.find()
-    .then(allMessages=>{
-        res.json(allMessages)
+    .then(allReviews=>{
+        res.json({reviews: allReviews})
     })
     .catch((err) => console.log(err))
 })
@@ -22,12 +22,13 @@ router.get("/details/:id", (req, res) => {
         .catch(console.log)
 })
 
-router.post('/createreview', (req, res) => {
+router.post('/create', (req, res) => {
+    console.log('los datos a guardar son', req.body)
     Review.create(req.body)
         .then(newMessage => {
             const { _id } = newMessage
             User.findByIdAndUpdate(req.body.userId, {
-                $push: { message: _id }
+                $push: { review: _id }
             }, { new: true })
             .then(updatedUser => {
                 console.log(updatedUser)

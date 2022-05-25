@@ -26,13 +26,6 @@ const tripSchema = new Schema(
         maxlength: 300
 
     },
-    image:{
-        type:String
-    },
-    traveler: [{
-    type: Schema.Types.ObjectId,
-    ref: 'User'
-    }]
 },
 {
     timestamps: true

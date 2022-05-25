@@ -14,19 +14,13 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
-      minlength: 6
+      min: 6
     },
     email: {
       type: String,
       required: true,
-      unique: true,
       //match: [/^\S+@\S+\.\S+$/, 'Please use a valid email address.']
     },
-    phoneNumber: {
-      type: Number,
-      minlength: 10,
-      maxlength: 10
-  },
   trip: [{
     type: Schema.Types.ObjectId,
     ref: 'Trip'
@@ -34,7 +28,7 @@ const userSchema = new Schema(
 
   review: [{
     type: Schema.Types.ObjectId,
-    ref: 'Message'
+    ref: 'Review'
   }],
 },
   {

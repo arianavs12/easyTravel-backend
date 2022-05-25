@@ -13,10 +13,6 @@ const reviewSchema = new Schema(
         maxlength: 500
 
     },
-    traveler: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
 },
 {
     timestamps: true

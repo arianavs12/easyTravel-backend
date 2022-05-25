@@ -23,19 +23,24 @@ router.get("/details/:id", (req, res) => {
         .catch(console.log)
 })
 
-router.post('/create', (req, res) => {
+router.post('/create',(req,res)=>{
+    console.log('los datos a guardar son', req.body)
+
     Trip.create(req.body)
-        .then(newTrip => {
-            const { _id } = newTrip
-            User.findByIdAndUpdate(req.body.userId, {
-                $push: { trip: _id }
-            }, { new: true })
-            .then(updatedUser => {
-                console.log(updatedUser)
-                res.json(updatedUser)
-            })
+    .then(newTrip => {
+        const { _id } = newTrip
+        User
+        .findByIdAndUpdate(req.body.userId, {
+            $push: {trip: _id}
+        }, { new: true})
+        .then(userUpdated => {
+            console.log(userUpdated)
+            res.json(userUpdated)
+
+        })
     })
     .catch(console.log)
+    
 })
 
 router.put("/edit/:id", (req, res) => {
