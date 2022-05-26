@@ -14,7 +14,7 @@ const tripSchema = new Schema(
     typeOfLodjing: {
         type: String,
         required: true,
-        enum: ["Hotel", "Airbnb", "Hostal", "Sin cargo por hospedaje"]
+        enum: ["Hotel", "Airbnb", "Hostal", "No Charge"]
     },
     budget: {
         type: Number,
