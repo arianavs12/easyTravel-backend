@@ -2,10 +2,6 @@ const router = require("express").Router()
 const Trip = require("../models/Trip.model")
 const User = require("../models/User.model")
 
-//const mongoose = require("mongoose")
-
-//CRUD
-
 router.get('/alltrips',(req,res)=>{
     Trip.find()
     .then(allTrips=>{
@@ -28,18 +24,12 @@ router.post('/create',(req,res)=>{
 
     Trip.create(req.body)
     .then(newTrip => {
-        const { _id } = newTrip
-        User
-        .findByIdAndUpdate(req.body.userId, {
-            $push: {trip: _id}
-        }, { new: true})
-        .then(userUpdated => {
-            console.log(userUpdated)
-            res.json(userUpdated)
-
-        })
+    
+        return res.json(newTrip)
     })
-    .catch(console.log)
+    .catch(res.status(400)
+    .json({ message: 'algo salió mal' })
+    )
     
 })
 

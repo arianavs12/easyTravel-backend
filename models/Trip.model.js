@@ -7,11 +7,9 @@ const tripSchema = new Schema(
     },
     typeOfTransport: {
             type:String,
-            enum: ["Aereo", "Car"]
     },
     typeOfLodjing: {
         type: String,
-        enum: ["Hotel", "Airbnb", "No Charge"]
     },
     budget: {
         type: Number,

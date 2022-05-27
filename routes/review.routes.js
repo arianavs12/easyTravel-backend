@@ -2,9 +2,6 @@ const router = require("express").Router()
 const Review = require("../models/Review.model")
 const User = require("../models/User.model")
 
-//const mongoose = require("mongoose")
-
-//CRUD
 router.get('/allreviews',(req,res)=>{
     Review.find()
     .then(allReviews=>{
