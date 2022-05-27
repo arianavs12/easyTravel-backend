@@ -4,26 +4,20 @@ const tripSchema = new Schema(
     {
     destination: {
         type: String,
-        required: true
     },
     typeOfTransport: {
             type:String,
-            required: true,
-            enum: ["Aereo", "Terrestre"]
+            enum: ["Aereo", "Car"]
     },
     typeOfLodjing: {
         type: String,
-        required: true,
-        enum: ["Hotel", "Airbnb", "Hostal", "No Charge"]
+        enum: ["Hotel", "Airbnb", "No Charge"]
     },
     budget: {
         type: Number,
-        required: true
     },
     description: {
         type: String,
-        required: true,
-        maxlength: 300
 
     },
 },
