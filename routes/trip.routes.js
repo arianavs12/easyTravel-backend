@@ -27,9 +27,7 @@ router.post('/create',(req,res)=>{
     
         return res.json(newTrip)
     })
-    .catch(res.status(400)
-    .json({ message: 'algo salió mal' })
-    )
+    .catch(console.log)
     
 })
 
